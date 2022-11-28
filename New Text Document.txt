@@ -1,0 +1,66 @@
+WebDriver driver;
+	
+	@BeforeMethod
+	public void openGitHub() {
+		driver=new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.get("https://github.com/login");
+	}
+	
+	@AfterMethod
+	public void closetab() {
+		driver.close();
+	}
+	
+	@Test(description="Login with real data")
+	public void SuccessfulLogin() {
+		
+		driver.findElement(By.id("login_field")).sendKeys("helo12");
+		driver.findElement(By.id("password")).sendKeys("Asad");
+		driver.findElement(By.name("commit")).click();
+		Assert.assertEquals(driver.getTitle(), "GitHub");
+		
+
+	}
+
+	@Test(description="Login with fake data")
+	public void UnsuccesfulLogin() throws InterruptedException {
+		
+		
+		driver.findElement(By.id("login_field")).sendKeys("helo12");
+		driver.findElement(By.id("password")).sendKeys("Asad77");
+		driver.findElement(By.name("commit")).click();
+		Assert.assertEquals(driver.getTitle(), "Sign in to GitHub · GitHub");
+
+	}
+	@Test(description="Login with Null values")
+	public void UnsuccesfulLogin1() {
+		
+		
+		driver.findElement(By.id("login_field")).sendKeys("");
+		driver.findElement(By.id("password")).sendKeys("");
+		driver.findElement(By.name("commit")).click();
+		Assert.assertEquals(driver.getTitle(), "Sign in to GitHub · GitHub");
+	    
+	    
+
+	}
+	@Test(description="Login with Invalid data")
+	public void UnsuccesfulLogin2() {
+		
+		
+		driver.findElement(By.id("login_field")).sendKeys("@##$@@!$");
+		driver.findElement(By.id("password")).sendKeys("!@#$%$#@#@");
+		driver.findElement(By.name("commit")).click();
+		Assert.assertEquals(driver.getTitle(), "Sign in to GitHub · GitHub");
+	}
+	@Test(description="After Login search something")
+	public void search() {
+		
+		
+		driver.findElement(By.id("login_field")).sendKeys("helo1234567");
+		driver.findElement(By.id("password")).sendKeys("Asad");
+		driver.findElement(By.name("commit")).click();
+		driver.findElement(By.name("q")).sendKeys("Testerw"+Keys.ENTER);
+		Assert.assertEquals(driver.getTitle(), "Search · Testerw");
+	}
