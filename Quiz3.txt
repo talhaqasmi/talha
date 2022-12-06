@@ -1,0 +1,7 @@
+Quiz 3
+
+• Login to baseline "http://release01.curemd.com/curemdy/datlogin.asp" using credentials from excel
+• Go to Patient button
+• Search Test Patient using [LastName = "Aaa", FirstName = "ZIXHEENOQK", DOB = "01/01/2002"] 
+• Print selected value from "Country" dropdown
+• Print all values from "Status" dropdown and compare with the List [Single, Married, Separated, Divorced, Widowed, Partnered, Unknown]
